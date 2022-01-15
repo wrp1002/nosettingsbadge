@@ -1,0 +1,12 @@
+{
+	"title": "NoSettingsBadge",
+	"description": "This will hide the annoying settings notification badge from software updates or any other source",
+	"compatibility": "Made for iOS 14",
+	"screenshots": ["screenshot1.png", "screenshot2.png"],
+	"changelog": [
+		{
+			"version": "1.0.0",
+			"changes": ["Initial Release"]
+		}
+	]
+}
