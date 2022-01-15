@@ -7,6 +7,10 @@
 		{
 			"version": "1.0.0",
 			"changes": ["Initial Release"]
+		},
+		{
+			"version": "1.0.1",
+			"changes": ["Fix badges disappearing breifly"]
 		}
 	]
 }

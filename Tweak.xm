@@ -1,29 +1,23 @@
 //	=========================== Classes / Functions ===========================
 
 
-@interface SBIconBadgeView : UIView
+@interface SBApplication : NSObject
+@property (nonatomic,readonly) NSString *bundleIdentifier;
+-(NSString *)bundleIdentifier;
 @end
 
-@interface SBIconView : UIView
-@property (nonatomic,copy,readonly) NSString *applicationBundleIdentifierForShortcuts; 
+@interface SBApplicationIcon
+-(id)application;
 @end
 
 
 //	=========================== Hooks ===========================
 
 %hook SBIconBadgeView
-	-(void)layoutSubviews {
-		UIView *parent = self.superview.superview.superview;
-		NSString *className = NSStringFromClass([parent class]);
-
-		if (![className isEqualToString:@"SBIconView"])
-			return;
-
-		SBIconView *icon = (SBIconView *)parent;
-		NSString *bundleId = icon.applicationBundleIdentifierForShortcuts;
-
+	-(void)configureForIcon:(id)arg1 infoProvider:(id)arg2 {
+		NSString *bundleId = [[arg1 application] bundleIdentifier];
 		if ([bundleId isEqualToString:@"com.apple.Preferences"])
-			[self setHidden:YES];
+			return;
 
 		%orig;
 	}
