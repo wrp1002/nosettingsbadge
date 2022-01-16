@@ -1,25 +1,34 @@
-//	=========================== Classes / Functions ===========================
+#define TWEAK_NAME @"NoSettingsBadge"
 
+@interface Debug : NSObject
+	+(void)Log:(NSString *)msg;
+@end
+
+@implementation Debug
+	//	Show log with tweak name as prefix for easy grep
+	+(void)Log:(NSString *)msg {
+		NSLog(@"%@: %@", TWEAK_NAME, msg);
+	}
+@end
+
+
+//	=========================== Classes / Functions ===========================
 
 @interface SBApplication : NSObject
 @property (nonatomic,readonly) NSString *bundleIdentifier;
--(NSString *)bundleIdentifier;
 @end
-
-@interface SBApplicationIcon
--(id)application;
-@end
-
 
 //	=========================== Hooks ===========================
 
-%hook SBIconBadgeView
-	-(void)configureForIcon:(id)arg1 infoProvider:(id)arg2 {
-		NSString *bundleId = [[arg1 application] bundleIdentifier];
-		if ([bundleId isEqualToString:@"com.apple.Preferences"])
-			return;
 
-		%orig;
+%hook SBApplication
+	-(id)badgeValue {
+		if ([[self bundleIdentifier] isEqualToString:@"com.apple.Preferences"])
+			return nil;
+		return %orig;
 	}
 %end
 
+%ctor {
+	[Debug Log:[NSString stringWithFormat:@"============== %@ started ==============", TWEAK_NAME]];
+}
