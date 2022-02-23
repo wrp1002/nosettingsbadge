@@ -1,6 +1,6 @@
 Package: com.wrp1002.nosettingsbadge
 Name: NoSettingsBadge
-Version: 1.0.2
+Version: 1.0.3
 Architecture: iphoneos-arm
 Description: Remove settings notification badge!
 Maintainer: Wes <wes.hamster@gmail.com>

@@ -1,6 +1,6 @@
 {
 	"title": "NoSettingsBadge",
-	"description": "This will hide the annoying settings notification badge from software updates or any other source",
+	"description": "This will hide the annoying settings notification badge from software updates or any other source. It will also hide the software update badge inside the settings app",
 	"compatibility": "Made for iOS 14",
 	"screenshots": ["screenshot1.png", "screenshot2.png"],
 	"changelog": [
@@ -11,11 +11,14 @@
 		{
 			"version": "1.0.1",
 			"changes": ["Fix badges disappearing breifly"]
-		}
-		,
+		},
 		{
 			"version": "1.0.2",
 			"changes": ["Should work if Settings is in a folder now"]
+		},
+		{
+			"version": "1.0.3",
+			"changes": ["Removed badge inside settings app"]
 		}
 	]
 }

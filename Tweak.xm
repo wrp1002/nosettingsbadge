@@ -18,6 +18,15 @@
 @property (nonatomic,readonly) NSString *bundleIdentifier;
 @end
 
+@interface PSSpecifier : NSObject
+@property (nonatomic,retain) NSString *identifier;
+@end
+
+@interface PSBadgedTableCell
+@property (nonatomic,retain) PSSpecifier *specifier;
+@end
+
+
 //	=========================== Hooks ===========================
 
 
@@ -26,6 +35,17 @@
 		if ([[self bundleIdentifier] isEqualToString:@"com.apple.Preferences"])
 			return nil;
 		return %orig;
+	}
+%end
+
+%hook PSBadgedTableCell
+	-(void)badgeWithInteger:(NSInteger)badgeValue {
+		NSString *identifier = [self specifier].identifier;
+
+		if ([identifier isEqualToString:@"General"] || [identifier isEqualToString:@"SOFTWARE_UPDATE_LINK"])
+			badgeValue = 0;
+		
+		%orig(badgeValue);
 	}
 %end
 
