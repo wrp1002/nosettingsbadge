@@ -1,3 +1,6 @@
+#import <UIKit/UIKit.h>
+#import <objc/runtime.h>
+
 #define TWEAK_NAME @"NoSettingsBadge"
 
 @interface Debug : NSObject
@@ -34,6 +37,7 @@
 	-(id)badgeValue {
 		if ([[self bundleIdentifier] isEqualToString:@"com.apple.Preferences"])
 			return nil;
+
 		return %orig;
 	}
 %end
@@ -44,7 +48,7 @@
 
 		if ([identifier isEqualToString:@"General"] || [identifier isEqualToString:@"SOFTWARE_UPDATE_LINK"])
 			badgeValue = 0;
-		
+
 		%orig(badgeValue);
 	}
 %end
